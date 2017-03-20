@@ -1,0 +1,25 @@
+{
+  "welcomeFile": "/shoppinglist/test/index.html",
+  "logout": {
+    "logoutEndpoint": "/do/logout"
+  },
+  "routes": [
+    {
+      "source": "^/destination/SHOPPINGLIST_BACKEND/(.*)$",
+      "target": "$1",
+      "destination": "SHOPPINGLIST_BACKEND",
+      "csrfProtection": false
+    },
+    {
+      "source": "^/shoppinglist/((?!test/).*)$",
+      "target": "$1",
+      "localDir": "webapp",
+      "authenticationType": "none"
+    },
+    {
+      "source": "^/shoppinglist/test/(.*)$",
+      "target": "$1",
+      "localDir": "webapp/test"
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+.hdi
+node_modules
+node
+target
+etc
+*.fpr
+npm-debug.log
+*.log

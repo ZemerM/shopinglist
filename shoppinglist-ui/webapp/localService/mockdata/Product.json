@@ -1,0 +1,29 @@
+[{
+	"ProductId": "1",
+	"ProductCategoryId":"2",
+	"__metadata": {
+		"uri": "Products(1)",
+		"type": "shoppinglist.Products"
+	},
+	"to_ProductTexts": {
+		"__deferred": {
+			"uri": "Products(1)/to_ProductTexts"
+		}
+	} 
+}, 
+{
+	"ProductId": "2",
+	"ProductCategoryId":"2",
+	"__metadata": {
+		"uri": "Products(2)",
+		"type": "shoppinglist.Products"
+	},
+	"to_ProductTexts": {
+		"__deferred": {
+			"uri": "Products(2)/to_ProductTexts"
+		}
+	}
+}
+
+
+]

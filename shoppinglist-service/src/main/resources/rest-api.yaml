@@ -1,0 +1,509 @@
+################################################################################
+#                             Metadata                                         #
+################################################################################
+# this is an example API to illustrate the usage of Swagger 
+
+swagger: '2.0'
+info:
+  title: Shopping List API
+  description: This API belongs to the ICF Maven Archetype
+  version: "1.0.0"
+  contact: 
+    name: swaggerman@sap.com
+  
+# array of all schemes that your API supports
+schemes:
+  - https
+  
+# will be prefixed to all paths
+basePath: /v1
+produces:
+  - application/json
+  
+  
+################################################################################
+#                                 Paths                                        #
+################################################################################  
+paths:
+
+
+  /products:
+    get:
+      summary: Returns a list of Products.
+      description: |
+        Returns a list of Products. The list is pageable.
+      tags:
+        - Product
+      parameters:
+        - name: pageId
+          in:  query
+          type: integer
+          format: int32
+          default: 0
+          required: false
+          description: page number
+        - name: pageSize
+          in:  query
+          type: integer
+          format: int32
+          default: 32
+          required: false
+          description: number of Products per page
+      responses:
+        200:
+          description: A list of Products
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Product'
+       
+    post:
+      summary: Creates a new Product.
+      description: |
+        Creates a new Product. The URI of the new Product is returned in the Location header field. Field Id must be equal to 0.
+      tags:
+        - Product
+      parameters:
+        - name: product
+          in: body
+          description: The new Product to be created
+          required: true
+          schema:
+            $ref: '#/definitions/Product'
+      responses:
+        201:
+          description: Product created
+        400:
+          description: Malformed payload
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Error'
+        409: 
+          description: Product already exists
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Error'
+             
+  /products/{id}:              
+    get:
+      summary: Retrieves a Product.
+      description: |
+        Retrieves a Product from the database.
+      tags:
+        - Product
+      parameters:
+        - name: id
+          in: path
+          description: The id of the Product to be retrieved
+          type: integer
+          format: int64
+          required: true
+      responses:
+        200:
+          description: Product found
+          schema:
+            $ref: '#/definitions/Product'          
+        404: 
+          description: Product does not exist
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Error'
+
+    put:
+      summary: Updates an existing Product.
+      description: |
+        Updates an existing product. The URI of the Product is returned in the Location header field.
+      tags:
+        - Product
+      parameters:
+        - name: id
+          in: path
+          description: The id of the Product to be retrieved
+          type: integer
+          format: int64
+          required: true      
+        - name: product
+          in: body
+          description: The Product to be modified
+          required: true
+          schema:
+            $ref: '#/definitions/Product'
+      responses:
+        200:
+          description: Product updated
+        404: 
+          description: Product not found
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Error'
+          
+    delete:
+      summary: Deletes a Product.
+      description: |
+        Deletes a Product from the database.
+      tags:
+        - Product
+      parameters:
+        - name: id
+          in: path
+          description: The id of the Product to be deleted
+          type: integer
+          format: int64
+          required: true
+      responses:
+        204:
+          description: Product deleted
+
+  /products/{id}/texts:              
+    get:
+      summary: Retrieves Product Texts.
+      description: |
+        Retrieves product texts in all languages from the database.
+      tags:
+        - ProductText
+      parameters:
+        - name: id
+          in: path
+          description: The id of the Product 
+          type: integer
+          format: int64
+          required: true
+      responses:
+        200:
+          description: Product Texts found
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/ProductText'         
+        404: 
+          description: Product does not exist
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Error'
+
+  /products/{id}/texts/{language}:
+    get:
+      summary: Gets one product text.
+      description: |
+        The product text of the product with the specified id and language is returned.
+      tags:
+        - ProductText
+      parameters:
+        - name: id
+          in: path
+          description: The id of the Product 
+          type: integer
+          format: int64
+          required: true      
+        - name: language
+          in: path
+          description: The language of the text 
+          type: string
+          required: true      
+      responses:
+        200:
+          description: Product text found
+          schema:
+            $ref: '#/definitions/ProductText'            
+        404: 
+          description: Product not found
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Error'             
+    put:
+      summary: Updates or creates a product text.
+      description: |
+        The product text of the product with the specified id and language is updated if it exists and created if not.
+      tags:
+        - ProductText
+      parameters:
+        - name: id
+          in: path
+          description: The id of the Product 
+          type: integer
+          format: int64
+          required: true      
+        - name: language
+          in: path
+          description: The language of the text 
+          type: string
+          required: true      
+        - name: product
+          in: body
+          description: The text
+          required: true
+          schema:
+            $ref: '#/definitions/ProductText'
+      responses:
+        200:
+          description: Product updated
+        404: 
+          description: Product not found
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Error'
+          
+    delete:
+      summary: Deletes a product text.
+      description: |
+        Deletes a product text from the database.
+      tags:
+        - ProductText
+      parameters:
+        - name: id
+          in: path
+          description: The id of the Product 
+          type: integer
+          format: int64
+          required: true      
+        - name: language
+          in: path
+          description: The language of the text 
+          type: string
+          required: true      
+      responses:
+        204:
+          description: Product text deleted
+                        
+  /shopping-lists:
+    get:
+      summary: Returns a list of Shopping Lists.
+      description: |
+        Returns a list of Shopping Lists. The list is pageable.
+      tags:
+        - Shopping List
+      parameters:
+        - name: pageId
+          in:  query
+          type: integer
+          format: int32
+          default: 0
+          required: false
+          description: page number          
+        - name: pageSize
+          in:  query
+          type: integer
+          format: int32
+          default: 32
+          required: false   
+          description: number of Shopping Lists per page
+      responses:
+        200:
+          description: A list of Shopping Lists
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/ShoppingList'
+
+    post:
+      summary: Creates a new Shopping List.
+      description: |
+        Creates a new Shopping List. The URI of the new Shopping List is returned in the Location header field. Field Id must be equal to 0.
+      tags:
+        - Shopping List
+      parameters:
+        - name: shoppingList
+          in: body
+          description: The new Shopping List to be created
+          required: true
+          schema:
+            $ref: '#/definitions/ShoppingList'
+      responses:
+        201:
+          description: Shopping List created
+        400:
+          description: Malformed payload
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Error'
+        409: 
+          description: Shopping List already exists
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Error'
+          
+  /shopping-lists/{id}:              
+    get:
+      summary: Retrieves a Shopping List.
+      description: |
+        Retrieves a Shopping List from the database.
+      tags:
+        - Shopping List
+      parameters:
+        - name: id
+          in: path
+          description: The id of the Shopping List to be retrieved
+          type: integer
+          format: int64
+          required: true
+      responses:
+        200:
+          description: Shopping List found
+          schema:
+            $ref: '#/definitions/ShoppingList' 
+        404: 
+          description: Shopping List does not exist
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Error'
+            
+    put:
+      summary: Updates an existing Shopping List
+      description: |
+        Updates an existing Shopping List. 
+      tags:
+        - Shopping List
+      parameters:
+        - name: id
+          in: path
+          description: The id of the Shopping List to be updated
+          type: integer
+          format: int64
+          required: true      
+        - name: shoppingList
+          in: body
+          description: The Shopping List to be updated
+          required: true
+          schema:
+            $ref: '#/definitions/ShoppingList'
+      responses:
+        200:
+          description: Shopping List updated
+        404: 
+          description: Shopping List not found
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Error'
+     
+    delete:
+      summary: Deletes a Shopping List.
+      description: |
+        Deletes a Shopping List from the database.
+      tags:
+        - Shopping List
+      parameters:
+        - name: id
+          in: path
+          description: The id of the Shopping List to be deleted
+          type: integer
+          format: int64
+          required: true
+      responses:
+        204:
+          description: Shopping List deleted
+
+    
+
+    
+################################################################################
+#                               Definitions                                    #
+################################################################################ 
+definitions:
+  Product:
+    type: object
+    properties:
+      productId:
+        type: integer
+        format: int64
+        description: Unique identifier representing a specific Product. A valid productId is a positive Integer.
+      productCategoryId:
+        type: integer
+        format: int32        
+        description: Unique identifier representing a specific Product Category. A valid productCategoryId is a positive Integer.
+      productNameLocalized:
+        type: string
+        description: A human readable representation of the Product in local language.
+      productDescriptionLocalized:
+        type: string
+        description: The product description in local language.
+      productTexts:   
+        type: array
+        items:
+              $ref: '#/definitions/ProductText'
+        
+  ProductText:
+    type: object
+    properties:
+      language:
+        type: string
+        description: The language indetifier.
+      productName:
+        type: string
+        description: Language dependent product name.
+      productDescription:
+        type: string
+        description: Language dependent product description.
+  
+  ShoppingList:
+    type: object
+    properties:
+      shoppingListId:
+        type: integer
+        format: int64
+        description: Unique identifier representing a specific Shopping List. A valid Id is a positive Integer.
+      shoppingListName:
+        type: string        
+        description: A human readable representation of the Shopping List.
+      shoppingListOwner:
+        type: string
+        description: The business partner who wants to buy the products on the Shopping List.
+      shoppingListItems:
+         type: array
+         description: List of ordered products.
+         items:
+            $ref: '#/definitions/ShoppingListItem'
+  
+  ShoppingListItem:
+    type: object
+    properties:
+       shoppingListItemId:
+          type: integer
+          format: int64
+          description: Unique identifier representing a specific Shopping List item. A valid Id is a positive Integer.
+       shoppingListId:
+          type: integer
+          format: int64
+          description: Unique identifier representing the Shopping List the item belongs to. A valid Id is a positive Integer.                   
+       productId:
+          type: integer
+          format: int64
+          description: Unique identifier of a product. A valid Id is a positive Integer representing an existing product.
+       quantity:
+          type: number
+          format: double
+          description: Order quantity of a product. A valid quantity is a positive number.
+       unitOfMeasure:
+          type: string
+          description: Unit of measure of ordered product quantity. 
+       status:
+          type: integer
+          format: int32
+          description: Status of order.
+          
+  Error:
+    type: object
+    properties:
+       code:
+          type: string
+          description: Internal message key
+       message:
+          type: string
+          description: Localized message     
+       target:
+          type: string
+          description: Indentifier of UI element
+       severity:
+          type: string
+          description: Classification of error severity       
+ 

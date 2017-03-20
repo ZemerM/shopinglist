@@ -1,0 +1,22 @@
+[{
+	"ProductId": "1",
+	"ProductName": "product1",
+	"Language":"en",
+	"__metadata": {
+		"uri": "Products(1)",
+		"type": "shoppinglist.Products"
+	}
+}, 
+{
+	"ProductId": "2",
+	"Language":"en",
+	"ProductName": "product2"
+	,
+	"__metadata": {
+		"uri": "Products(2)",
+		"type": "shoppinglist.Products"
+	}
+}
+
+
+]

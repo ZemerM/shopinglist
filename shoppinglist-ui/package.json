@@ -1,0 +1,10 @@
+{
+  "name": "shoppinglist-approuter",
+  "dependencies": {
+    "@sap/approuter": "2.7.0"
+  },
+  "scripts": {
+    "start": "node node_modules/@sap/approuter/approuter.js"
+  },
+  "description": "Shoppinglist Step-by-step example"
+}

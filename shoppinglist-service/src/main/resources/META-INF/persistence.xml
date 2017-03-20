@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" 
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+             xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+	<persistence-unit name="shoppinglist" transaction-type="RESOURCE_LOCAL">
+ 		<!-- List all classes to be exposed as Entities here. Due to the usage of Spring Boot JAR deployment and Eclipselink, it is not possible to have them scanned for. -->
+ 		<class>com.sap.icf.samples.shoppinglist.model.Product</class>
+ 		<class>com.sap.icf.samples.shoppinglist.model.ProductText</class>
+ 		<class>com.sap.icf.samples.shoppinglist.model.ShoppingListHeader</class>
+		<class>com.sap.icf.samples.shoppinglist.model.ShoppingListItem</class>
+		<properties>
+			<property name="eclipselink.weaving" value="static"/>
+			<property name="eclipselink.jpql.parser" value="org.eclipse.persistence.queries.ANTLRQueryBuilder" />
+		</properties>
+	</persistence-unit>
+</persistence>

@@ -1,0 +1,19 @@
+ProductId, Language, ProductName, ProductDescription
+1,en,Screwdriver,High quality Screwdriver
+1,de,Schraubenzieher,Hochwertiger Schraubenzieher
+2,de,Hammer,Hammer in Zimmermannsqualität
+2,en,Hammer,Hammer for Carpenters
+3,en,Gas Grill,Large Gas Grill
+3,de,Gasgrill,Gasgrill groß
+4,en,Charcoal Grill,Grill
+4,de,Holzkhohlegrill,Grill
+5,de,Milch,Milch 1.5%
+5,en,Milk,Milk 1.5% fat
+6,de,Kaugummi, Kaugummi
+6,en,Chewing Gum, Chewing Gum
+7,de,Muesli,Muesli
+7,en,Cereals,Cereals
+8,de,Brot,Brot
+8,en,Bread,Bread
+9,de,Butter,Butter
+9,en,Butter,Butter

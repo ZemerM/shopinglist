@@ -1,0 +1,50 @@
+<configuration scan="true" scanPeriod="30 seconds" debug="true">
+	<jmxConfigurator />
+	<springProfile name="cloud">
+		<appender name="STDOUT-JSON" class="ch.qos.logback.core.ConsoleAppender">
+			<!-- encode and enrich full message with the required fields/tags -->
+			<!--  <encoder class="com.sap.hcp.cf.logback.encoder.JsonEncoder" />  -->
+			<encoder>
+				<pattern>%d %-5level [%thread] %logger{0} [%mdc]>: %msg
+					%replace(%xEx){'\n', ' | '}%nopex%n</pattern>
+			</encoder> <!-- /Workaround -->
+		</appender>
+		<root level="${LOG_ROOT_LEVEL:-INFO}">
+			<appender-ref ref="STDOUT-JSON" />
+		</root>
+		<logger name="com.sap.icf" level="${LOG_ICF_CS_LEVEL:-INFO}"
+			additivity="false">
+			<appender-ref ref="STDOUT-JSON" />
+		</logger>
+	</springProfile>
+	<springProfile name="default">
+		<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+			<encoder>
+				<pattern>%d %-5level [%thread] %logger{0} [%mdc]>: %msg
+					%replace(%xEx){'\n', ' | '}%nopex%n</pattern>
+			</encoder>
+		</appender>
+		<root level="ERROR">
+			<appender-ref ref="STDOUT" />
+		</root>
+		<logger name="org.springframework.web" level="INFO" additivity="false">
+			<appender-ref ref="STDOUT" />
+		</logger>
+		<logger name="com.sap.icf" level="ALL" additivity="false">
+			<appender-ref ref="STDOUT" />
+		</logger>
+
+		<appender name="file" class="ch.qos.logback.core.FileAppender">
+			<layout class="ch.qos.logback.classic.PatternLayout">
+				<Pattern>%d{HH:mm:ss} %-5level %marker %X{DEAL ID} %logger{72} -
+					%msg%n</Pattern>
+			</layout>
+			<file>sap.log</file>
+			<append>true</append>
+		</appender>
+		<logger name="com.sap" level="ALL">
+			<appender-ref ref="file" />
+		</logger>
+
+	</springProfile>
+</configuration>

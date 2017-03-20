@@ -1,0 +1,77 @@
+_schema-version: "3.1"
+extends: com.sap.icf.samples.shoppinglist
+ID: com.sap.icf.samples.shoppinglist.canary-trial-mt-acceptance
+
+
+#################################
+# READ ME FIRST:
+#
+# This is an example extension descriptor that deploys the app in SaaS multitenancy mode.
+# In order to deploy this to your space, you will need to adjust the parameters for your space's properties (identity zone, the generated tenant id within the client id).
+# The example works for direct deployment in the canary trial space.
+#
+# When deploying to an org other than the AWS Canary Trial org, you will need to adjust this example to the right identityzone and client id suffix (note: these are the same
+# for all spaces within an org, so you can reuse them once you know them).
+# To determine the info, do the following commands when logged in to a space in the target org:
+#
+#   cf create-service xsuaa application temp
+#   cf create-service-key temp dummy
+#   cf service-key temp dummy
+#
+# The last command will dump the XSUAA configuration for this service key. From the JSON, take the value of "identityzone" and memorize the suffix from the "xsappname" 
+# (the characters following the exclamation mark, like "!t27").
+# Afterwards, clean up via:
+#
+#   cf delete-service-key temp dummy
+#   cf delete-service temp
+#
+##################################
+
+modules:
+
+  - name: shoppinglist-web
+    # When using the application shared plan for XSUAA, the PaaS tenant is available by prefixing the identity zone name to the default hostname. 
+    # This example hence contains cc-sap as prefix which fits the Canary trial space's identity zone for multitenancy. 
+    parameters:
+      #Pattern for the PaaS standard tenant host: <identityzone>-<default hostname>
+      host: cc-sap-${default-host}
+
+  - name: shoppinglist-service
+    properties:
+      SAP_JWT_TRUST_ACL: 
+         # Since SaaS tenants call with different identity zones, we need a wildcard mapping for any identity zone in the respective org.      
+         # Pattern: sb-<xsappname>!<tenant-suffix>. The tenant suffix is determined when creating the identity zone for the org.
+         # This example is built for the canary trial standard identity zone.
+       - clientid: sb-shoppinglist-${org}-${space}!t27
+         identityzone: "*"
+
+resources:
+
+# Reconfigure UAA for Multitenancy
+  - name: shoppinglist-uaa
+    parameters:
+      service: xsuaa
+      service-plan: application
+      config:
+         tenant-mode: shared
+         scopes:
+          - name: $XSAPPNAME.DisplayProduct
+            description: Display Products
+            grant-as-authority-to-apps: 
+             - $XSAPPNAME
+          - name: $XSAPPNAME.EditProduct
+            description: Edit Products 
+            grant-as-authority-to-apps: 
+             - $XSAPPNAME            
+         role-templates:
+          - name: DisplayProducts
+            description: Display Products 
+            scope-references:
+             - $XSAPPNAME.DisplayProduct
+          - name: EditProducts
+            description: Edit Products 
+            scope-references:
+             - $XSAPPNAME.DisplayProduct             
+             - $XSAPPNAME.EditProduct         
+         authorities:
+          - $ACCEPT_GRANTED_AUTHORITIES

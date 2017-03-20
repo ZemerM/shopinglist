@@ -1,0 +1,85 @@
+[{
+	"ProductId": "1",
+	"Quantity": "5",
+	"ShoppingListId": "1",
+	"ShoppingListItemId": "1",
+	"Status": "1",
+	"UnitOfMeasure": "kg",
+	"__metadata": {
+		"uri": "ShoppingListItems(1)",
+		"type": "shoppinglist.ShoppingListItem"
+	},
+	"to_Product": {
+		"__deferred": {
+			"uri": "ShoppingListItems(1)/to_Product"
+		}
+	},
+	"to_ShoppingListHeader": {
+		"__deferred": {
+			"uri": "ShoppingListItems(1)/to_ShoppingListHeader"
+		}
+	}
+}, {
+	"ProductId": "2",
+	"Quantity": "6",
+	"ShoppingListId":"1",
+	"ShoppingListItemId": "2",
+	"Status": "9",
+	"UnitOfMeasure": "kg",
+	"__metadata": {
+		"uri": "ShoppingListItems(2)",
+		"type": "shoppinglist.ShoppingListItem"
+	},
+	"to_Product": {
+		"__deferred": {
+			"uri": "ShoppingListItems(2)/to_Product"
+		}
+	},
+	"to_ShoppingListHeader": {
+		"__deferred": {
+			"uri": "ShoppingListItems(2)/to_ShoppingListHeader"
+		}
+	}
+}, {
+	"ProductId": "1",
+	"Quantity": "5",
+	"ShoppingListId": "2",
+	"ShoppingListItemId": "2",
+"Status": "2",
+	"UnitOfMeasure": "kg",
+	"__metadata": {
+		"uri": "ShoppingListItems(2)",
+		"type": "shoppinglist.ShoppingListItem"
+	},
+	"to_Product": {
+		"__deferred": {
+			"uri": "ShoppingListItems(2)/to_Product"
+		}
+	},
+	"to_ShoppingListHeader": {
+		"__deferred": {
+			"uri": "ShoppingListItems(2)/to_ShoppingListHeader"
+		}
+	}
+}, {
+	"ProductId": "2",
+	"Quantity": "9",
+	"ShoppingListId": "2",
+	"ShoppingListItemId": "3",
+	"Status": "2",
+	"UnitOfMeasure": "kg",
+	"__metadata": {
+		"uri": "ShoppingListItems(3)",
+		"type": "shoppinglist.ShoppingListItem"
+	},
+	"to_Product": {
+		"__deferred": {
+			"uri": "ShoppingListItems(3)/to_Product"
+		}
+	},
+	"to_ShoppingListHeader": {
+		"__deferred": {
+			"uri": "ShoppingListItems(3)/to_ShoppingListHeader"
+		}
+	}
+}]

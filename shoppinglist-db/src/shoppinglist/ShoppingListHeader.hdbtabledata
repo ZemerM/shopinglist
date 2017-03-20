@@ -1,0 +1,27 @@
+{ 
+  "format_version": 1, 
+  "imports": 
+  [ 
+	{ 
+		"target_table": "com.sap.icf.samples::ShoppingList.ShoppingListHeader", 
+		"source_data" : { 
+							"data_type" : "CSV", 
+							"file_name" : "com.sap.icf.samples::ShoppingListHeader.csv", 
+							"has_header" : true
+		}, 
+		"import_settings" : { 
+								"import_columns" : [ 
+									"ShoppingListId", 
+									"ShoppingListName",
+									"ShoppingListOwner"
+									]
+							}, 
+		"column_mappings" : { 
+									"ShoppingListId" : 1, 
+									"ShoppingListName"  : 2,
+									"ShoppingListOwner" : 3
+							} 
+		} 
+  ] 
+}
+

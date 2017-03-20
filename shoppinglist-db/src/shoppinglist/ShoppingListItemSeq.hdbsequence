@@ -1,0 +1,6 @@
+SEQUENCE "com.sap.icf.samples::ShoppingList.ShoppingListItemSeq"
+INCREMENT BY 10
+START WITH 10
+NO CYCLE
+RESET BY
+SELECT IFNULL(MAX("ShoppingListItemId"), 0) + 1 FROM "com.sap.icf.samples::ShoppingList.ShoppingListItem"

@@ -1,0 +1,39 @@
+namespace com.sap.icf.samples;
+
+    context ShoppingList{
+
+      type TLanguage:          String(2);       // ISO 639-1 https://de.wikipedia.org/wiki/ISO_639
+      type TProductId:         Integer64;	    // Java Long
+      type TShoppingListId:    Integer64;	    // Java Long
+      type TProductCategoryId: Integer;         // Java Integer
+      type TUnitOfMeasure:     String(2);
+      type TUser:              String(20);
+
+    entity Product{
+       key ProductId:         TProductId not null;
+           ProductCategoryId: TProductCategoryId;
+    }
+
+    entity ProductText{
+       key ProductId:          TProductId not null;
+       key Language:           TLanguage not null;
+           ProductName:        String(1024);
+           ProductDescription: String(1024);
+    }
+
+    entity ShoppingListHeader{
+       key ShoppingListId:    TShoppingListId not null;
+           ShoppingListName:  String(1024);
+           ShoppingListOwner: String(256);
+    }
+
+    entity ShoppingListItem{
+       key ShoppingListItemId: Integer64 not null;
+           ShoppingListId:     TShoppingListId not null;
+//           ShoppingListHeader: Association[1..1] to ShoppingListHeader on ShoppingListHeader.ShoppingListId = ShoppingListId;
+           ProductId:          TProductId not null;
+           Quantity:           DecimalFloat;
+           UnitOfMeasure:      TUnitOfMeasure;
+           Status:             Integer;
+    }
+};

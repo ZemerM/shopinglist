@@ -1,0 +1,33 @@
+{ 
+  "format_version": 1, 
+  "imports": 
+  [ 
+	{ 
+		"target_table": "com.sap.icf.samples::ShoppingList.ShoppingListItem", 
+		"source_data" : { 
+							"data_type" : "CSV", 
+							"file_name" : "com.sap.icf.samples::ShoppingListItem.csv", 
+							"has_header" : true
+		}, 
+		"import_settings" : { 
+								"import_columns" : [ 
+									"ShoppingListItemId", 
+                                    "ShoppingListId", 
+									"ProductId",
+									"Quantity",
+                                    "UnitOfMeasure",
+                                    "Status"
+									]
+							}, 
+		"column_mappings" : { 
+									"ShoppingListItemId": 1,
+                                    "ShoppingListId": 2,
+									"ProductId": 3,
+									"Quantity": 4,
+                                    "UnitOfMeasure": 5,
+                                    "Status": 6
+							} 
+		} 
+  ] 
+}
+

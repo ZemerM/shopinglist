@@ -1,0 +1,27 @@
+[{
+	"ShoppingListId": "1",
+	"ShoppingListName": "ShoppingListName 1",
+	"ShoppingListOwner": "ShoppingListOwner 1",
+	"__metadata": {
+		"uri": "ShoppingListHeaders(1)",
+		"type": "shoppinglist.ShoppingListHeader"
+	},
+	"to_ShoppingListItems": {
+		"__deferred": {
+			"uri": "ShoppingListHeaders(1)/to_ShoppingListItems"
+		}
+	} 
+}, {
+	"ShoppingListId": "2",
+	"ShoppingListName": "ShoppingListName 2",
+	"ShoppingListOwner": "ShoppingListOwner 2",
+	"__metadata": {
+		"uri": "ShoppingListHeaders(2)",
+		"type": "shoppinglist.ShoppingListHeader"
+	},
+	"to_ShoppingListItems": {
+		"__deferred": {
+			"uri": "ShoppingListHeaders(2)/to_ShoppingListItems"
+		}
+	}
+}]

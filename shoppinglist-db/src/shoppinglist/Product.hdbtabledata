@@ -1,0 +1,25 @@
+{ 
+  "format_version": 1, 
+  "imports": 
+  [ 
+	{ 
+		"target_table": "com.sap.icf.samples::ShoppingList.Product", 
+		"source_data" : { 
+							"data_type" : "CSV", 
+							"file_name" : "com.sap.icf.samples::Product.csv", 
+							"has_header" : true
+		}, 
+		"import_settings" : { 
+								"import_columns" : [ 
+									"ProductId", 
+									"ProductCategoryId"
+									]
+							}, 
+		"column_mappings" : { 
+									"ProductId" : 1, 
+									"ProductCategoryId"  : 2
+							} 
+		} 
+  ] 
+}
+

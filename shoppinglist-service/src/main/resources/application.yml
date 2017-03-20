@@ -1,0 +1,18 @@
+debug: false
+
+spring.jpa.show-sql: true
+spring.jpa.generate-ddl: false
+
+com.sap.icd.odatav2.spring:
+   servicePath: ShoppingList
+   persistenceUnit: shoppinglist
+   language: en
+   country: US
+---
+spring:
+    profiles: default
+    datasource:
+      username: sa
+      password:
+      driver-class-name: org.h2.Driver
+      url: jdbc:h2:file:~/tmp/shoppinglist;DB_CLOSE_ON_EXIT=FALSE    

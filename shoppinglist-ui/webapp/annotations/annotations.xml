@@ -1,0 +1,329 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx" Version="4.0">
+	<edmx:Reference Uri="/sap/bc/ui5_ui5/ui2/ushell/resources/sap/ushell/components/factsheet/vocabularies/UI.xml">
+		<edmx:Include Alias="UI" Namespace="com.sap.vocabularies.UI.v1"/>
+	</edmx:Reference>
+	<edmx:Reference Uri="$metadata">
+		<edmx:Include Alias="shoppinglist" Namespace="shoppinglist"/>
+	</edmx:Reference>
+	<edmx:Reference Uri="http://docs.oasis-open.org/odata/odata-data-aggregation-ext/v4.0/cs02/vocabularies/Org.OData.Aggregation.V1.xml">
+		<edmx:Include Alias="Aggregation" Namespace="Org.OData.Aggregation.V1"/>
+	</edmx:Reference>
+	<edmx:Reference Uri="http://docs.oasis-open.org/odata/odata/v4.0/errata03/os/complete/vocabularies/Org.OData.Capabilities.V1.xml">
+		<edmx:Include Alias="Capabilities" Namespace="Org.OData.Capabilities.V1"/>
+	</edmx:Reference>
+	<edmx:Reference Uri="https://wiki.scn.sap.com/wiki/download/attachments/448470974/Common.xml?api=v2">
+		<edmx:Include Alias="Common" Namespace="com.sap.vocabularies.Common.v1"/>
+	</edmx:Reference>
+	<edmx:Reference Uri="https://wiki.scn.sap.com/wiki/download/attachments/448470971/Communication.xml?api=v2">
+		<edmx:Include Alias="vCard" Namespace="com.sap.vocabularies.Communication.v1"/>
+	</edmx:Reference>
+	<edmx:Reference Uri="http://docs.oasis-open.org/odata/odata/v4.0/errata03/os/complete/vocabularies/Org.OData.Core.V1.xml">
+		<edmx:Include Alias="Core" Namespace="Org.OData.Core.V1"/>
+	</edmx:Reference>
+	<edmx:Reference Uri="http://docs.oasis-open.org/odata/odata/v4.0/errata03/os/complete/vocabularies/Org.OData.Measures.V1.xml">
+		<edmx:Include Alias="CQP" Namespace="Org.OData.Measures.V1"/>
+	</edmx:Reference>
+	<edmx:DataServices>
+		<Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="shoppinglist.shoppinglist">
+			<!--===============================================================================
+                Entity Type from chosen collection 
+                ================================================================================-->
+			<Annotations Target="shoppinglist.ShoppingListHeader">
+				<Annotation Term="UI.LineItem">
+					<Collection>
+						<Record Type="UI.DataField">
+							<PropertyValue Property="Label" String="{@i18n&gt;@SHOPPING_LIST_ID}"/>
+							<PropertyValue Property="Value" Path="ShoppingListId"/>
+						</Record>
+						<Record Type="UI.DataField">
+							<PropertyValue Property="Label" String="{@i18n&gt;@SHOPPING_LIST_NAME}"/>
+							<PropertyValue Property="Value" Path="ShoppingListName"/>
+						</Record>
+						<Record Type="UI.DataField">
+							<PropertyValue Property="Value" Path="ShoppingListOwner"/>
+							<PropertyValue Property="Label" String="{@i18n&gt;@ShoppingListOwner}"/>
+						</Record>
+					</Collection>
+				</Annotation>
+				<Annotation Term="UI.SelectionFields">
+					<Collection>
+						<PropertyPath>ShoppingListId</PropertyPath>
+						<PropertyPath>ShoppingListName</PropertyPath>
+					</Collection>
+				</Annotation>
+				<Annotation Term="UI.DataPoint">
+					<Record Type="UI.DataPointType">
+						<PropertyValue Property="Title" String="{@i18n&gt;@GeneralInfoFacetLabel}"/>
+						<PropertyValue Property="Value" Path="ShoppingListId"/>
+						<PropertyValue Property="Description" String="{@i18n&gt;@SHOPPING_LIST_ID}"/>
+						<PropertyValue Property="Visualization" EnumMember="UI.VisualizationType/Number"/>
+						<PropertyValue Property="ValueFormat">
+							<Record Type="UI.NumberFormat">
+								<PropertyValue Property="ScaleFactor" Decimal="1"/>
+								<PropertyValue Property="NumberOfFractionalDigits" Int="0"/>
+							</Record>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+				<Annotation Term="UI.DataPoint" Qualifier="Owner">
+					<Record Type="UI.DataPointType">
+						<PropertyValue Property="Title" String="{@i18n&gt;@ShoppingListOwner}"/>
+						<PropertyValue Property="Value" Path="ShoppingListOwner"/>
+						<PropertyValue Property="TargetValue" Path="ShoppingListOwner"/>
+					</Record>
+				</Annotation>
+				<Annotation Term="UI.FieldGroup">
+					<Record Type="UI.FieldGroupType">
+						<PropertyValue Property="Data">
+							<Collection>
+								<Record Type="UI.DataField">
+									<PropertyValue Property="Label" String="{@i18n&gt;@SHOPPING_LIST_ID}"/>
+									<PropertyValue Property="Value" Path="ShoppingListId"/>
+									<PropertyValue Property="IconUrl" Path="ShoppingListId"/>
+								</Record>
+								<Record Type="UI.DataField">
+									<PropertyValue Property="Label" String="{@i18n&gt;@ShoppingListOwner}"/>
+									<PropertyValue Property="Value" Path="ShoppingListOwner"/>
+									<PropertyValue Property="IconUrl" Path="ShoppingListOwner"/>
+								</Record>
+							</Collection>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+				<Annotation Term="UI.Identification">
+					<Collection>
+<!--						<Record Type="UI.DataField">
+							<PropertyValue Property="Label" String="{@i18n&gt;@SHOPPING_LIST_ID}"/>
+							<PropertyValue Property="Value" Path="ShoppingListId"/>
+						</Record>-->
+						<Record Type="UI.DataField">
+							<PropertyValue Property="Label" String="{@i18n&gt;@SHOPPING_LIST_NAME}"/>
+							<PropertyValue Property="Value" Path="ShoppingListName"/>
+						</Record>
+						<Record Type="UI.DataField">
+							<PropertyValue Property="Label" String="{@i18n&gt;@ShoppingListOwner}"/>
+							<PropertyValue Property="Value" Path="ShoppingListOwner"/>
+						</Record>
+					</Collection>
+				</Annotation>
+				<Annotation Term="UI.Facets">
+					<Collection>
+						<Record Type="UI.CollectionFacet">
+							<PropertyValue Property="Facets">
+								<Collection>
+									<Record Type="UI.ReferenceFacet">
+										<PropertyValue Property="Label" String="{@i18n&gt;@GeneralInfoFacetLabel}"/>
+										<PropertyValue Property="Target" AnnotationPath="@UI.Identification"/>
+									</Record>
+								</Collection>
+							</PropertyValue>
+							<PropertyValue Property="Label" String="{@i18n&gt;@SHOPPING_LIST_DETAILS}"/>
+							<Annotation Term="UI.IsSummary"/>
+							<Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/Low"/>
+						</Record>
+						<Record Type="UI.ReferenceFacet">
+							<PropertyValue Property="Label" String="{@i18n&gt;@SHOPPING_LIST_ITEMS}"/>
+							<PropertyValue Property="Target" AnnotationPath="to_ShoppingListItems/@UI.LineItem"/>
+						</Record>
+					</Collection>
+				</Annotation>
+			</Annotations>
+			<Annotations Target="shoppinglist.ShoppingListItem">
+				<Annotation Term="UI.LineItem">
+					<Collection>
+						<Record Type="UI.DataField">
+							<PropertyValue Property="Label" String="{@i18n&gt;@SHOPPING_LIST_ITEM}"/>
+							<PropertyValue Property="Value" Path="ShoppingListItemId"/>
+						</Record>
+						<Record Type="UI.DataField">
+							<PropertyValue Property="Label" String="{@i18n&gt;@PRODUCT_ID}"/>
+							<PropertyValue Property="Value" Path="to_Product/ProductTextLocalized"/>
+						</Record>
+						<Record Type="UI.DataField">
+							<PropertyValue Property="Value" Path="Quantity"/>
+							<PropertyValue Property="Label" String="{@i18n&gt;@Quantity}"/>
+						</Record>
+						<Record Type="UI.DataField">
+							<PropertyValue Property="Value" Path="UnitOfMeasure"/>
+							<PropertyValue Property="Label" String="{@i18n&gt;@UnitOfMeasure}"/>
+						</Record>
+						<Record Type="UI.DataField">
+							<PropertyValue Property="Label" String="{@i18n&gt;@STATUS}"/>
+							<PropertyValue Property="Value" Path="Status"/>
+						</Record>
+					</Collection>
+				</Annotation>
+				<Annotation Term="UI.FieldGroup">
+					<Record Type="UI.FieldGroupType">
+						<PropertyValue Property="Data">
+							<Collection>
+								<Record Type="UI.DataField">
+									<PropertyValue Property="Label" String="{@i18n&gt;@SHOPPING_LIST_ITEM}"/>
+									<PropertyValue Property="Value" Path="ShoppingListItemId"/>
+								</Record>
+								<Record Type="UI.DataField">
+									<PropertyValue Property="Label" String="{@i18n&gt;@STATUS}"/>
+									<PropertyValue Property="Value" Path="Status"/>
+								</Record>
+							</Collection>
+						</PropertyValue>
+						<PropertyValue Property="Label" String="{@i18n&gt;@SHOPPING_LIST_ITEM}"/>
+					</Record>
+				</Annotation>
+				<Annotation Term="UI.Identification">
+					<Collection>
+<!-- 						<Record Type="UI.DataField">
+							<PropertyValue Property="Label" String="{@i18n&gt;@SHOPPING_LIST_ITEM}"/>
+							<PropertyValue Property="Value" Path="ShoppingListItemId"/>
+						</Record>  -->
+						<Record Type="UI.DataField">
+							<PropertyValue Property="Label" String="{@i18n&gt;@PRODUCT_ID}"/>
+							<PropertyValue Property="Value" Path="ProductId"/>
+						</Record>
+						<Record Type="UI.DataField">
+							<PropertyValue Property="Label" String="{@i18n&gt;@Quantity}"/>
+							<PropertyValue Property="Value" Path="Quantity"/>
+						</Record>
+						<Record Type="UI.DataField">
+							<PropertyValue Property="Value" Path="UnitOfMeasure"/>
+							<PropertyValue Property="Label" String="{@i18n&gt;@UnitOfMeasure}"/>
+						</Record>
+						<Record Type="UI.DataField">
+							<PropertyValue Property="Label" String="{@i18n&gt;@STATUS}"/>
+							<PropertyValue Property="Value" Path="Status"/>
+						</Record>
+						<Record Type="UI.DataField">
+							<PropertyValue Property="Label" String="{@i18n&gt;@SHOPPING_LIST_ID}"/>
+							<PropertyValue Property="Value" Path="ShoppingListId"/>
+						</Record>
+					</Collection>
+				</Annotation>
+				<Annotation Term="UI.Facets">
+					<Collection>
+						<Record Type="UI.CollectionFacet">
+							<PropertyValue Property="Facets">
+								<Collection>
+									<Record Type="UI.ReferenceFacet">
+										<PropertyValue Property="Target" AnnotationPath="@UI.Identification"/>
+									</Record>
+								</Collection>
+							</PropertyValue>
+							<PropertyValue Property="Label" String="{@i18n&gt;@SHOPPING_LIST_ITEMS}"/>
+						</Record>
+						<Record Type="UI.ReferenceFacet">
+							<PropertyValue Property="Label" String="{@i18n&gt;@PRODUCTS}"/>
+							<PropertyValue Property="Target" AnnotationPath="to_Product/@UI.FieldGroup"/>
+						</Record>
+					</Collection>
+				</Annotation>
+				<Annotation Term="UI.DataPoint">
+					<Record Type="UI.DataPointType">
+						<PropertyValue Property="Title" String="{@i18n&gt;@SHOPPING_LIST_ITEM}"/>
+						<PropertyValue Property="Value" Path="ShoppingListItemId"/>
+					</Record>
+				</Annotation>
+				<Annotation Term="UI.DataPoint" Qualifier="Status">
+					<Record Type="UI.DataPointType">
+						<PropertyValue Property="Title" String="{@i18n&gt;@STATUS}"/>
+						<PropertyValue Property="Value" Path="Status"/>
+					</Record>
+				</Annotation>
+				<Annotation Term="UI.DataPoint" Qualifier="Text">
+					<Record Type="UI.DataPointType">
+						<PropertyValue Property="Title" String="{@i18n&gt;@DESCRIPTION}"/>
+						<PropertyValue Property="Value" Path="to_Product/ProductTextLocalized"/>
+					</Record>
+				</Annotation>
+			</Annotations>
+			<Annotations Target="shoppinglist.Product">
+				<Annotation Term="UI.LineItem" Qualifier="Product">
+					<Collection>
+						<Record Type="UI.DataField">
+							<PropertyValue Property="Value" Path="ProductId"/>
+							<PropertyValue Property="Label" String="{@i18n&gt;@PRODUCT_ID}"/>
+						</Record>
+						<Record Type="UI.DataField">
+							<PropertyValue Property="Value" Path="ProductName"/>
+							<PropertyValue Property="Label" String="{@i18n&gt;@PRODUCT_NAME}"/>
+						</Record>
+						<Record Type="UI.DataField">
+							<PropertyValue Property="Value" Path="productTextLocalized"/>
+							<PropertyValue Property="Label" String="{@i18n&gt;@PRODUCT_DESCRIPTION}"/>
+						</Record>
+						<Record Type="UI.DataField">
+							<PropertyValue Property="Value" Path="ProductCategoryId"/>
+							<PropertyValue Property="Label" String="{@i18n&gt;@PRODUCT_CATEGORY}"/>
+						</Record>
+					</Collection>
+				</Annotation>
+				<Annotation Term="UI.DataPoint">
+					<Record Type="UI.DataPointType">
+						<PropertyValue Property="Title" String="{@i18n&gt;@PRODUCT_ID}"/>
+						<PropertyValue Property="Value" Path="ProductId"/>
+					</Record>
+				</Annotation>
+				<Annotation Term="UI.DataPoint" Qualifier="ProductName">
+					<Record Type="UI.DataPointType">
+						<PropertyValue Property="Title" String="{@i18n&gt;@PRODUCT_NAME}"/>
+						<PropertyValue Property="Value" Path="ProductTextLocalized"/>
+					</Record>
+				</Annotation>
+				<Annotation Term="UI.FieldGroup">
+					<Record Type="UI.FieldGroupType">
+						<PropertyValue Property="Data">
+							<Collection>
+								<Record Type="UI.DataField">
+									<PropertyValue Property="Label" String="{@i18n&gt;@PRODUCT_ID}"/>
+									<PropertyValue Property="Value" Path="ProductId"/>
+								</Record>
+								<Record Type="UI.DataField">
+									<PropertyValue Property="Label" String="{@i18n&gt;@PRODUCT_NAME}"/>
+									<PropertyValue Property="Value" Path="ProductTextLocalized"/>
+								</Record>
+								<Record Type="UI.DataField">
+									<PropertyValue Property="Label" String="{@i18n&gt;@PRODUCT_DESCRIPTION}"/>
+									<PropertyValue Property="Value" Path="ProductDescriptionLocalized"/>
+								</Record>
+							</Collection>
+						</PropertyValue>
+						<PropertyValue Property="Label" String="{@i18n&gt;@PRODUCT_DETAILS}"/>
+					</Record>
+				</Annotation>
+				<Annotation Term="UI.Facets">
+					<Collection>
+						<Record Type="UI.CollectionFacet">
+							<PropertyValue Property="Facets">
+								<Collection>
+									<Record Type="UI.ReferenceFacet">
+										<PropertyValue Property="Target" AnnotationPath="@UI.LineItem"/>
+									</Record>
+								</Collection>
+							</PropertyValue>
+						</Record>
+					</Collection>
+				</Annotation>
+			</Annotations>
+			<Annotations Target = "shoppinglist.ShoppingListItem/ProductId">
+				<Annotation Term = "Common.ValueList">
+					<Record>
+						<PropertyValue Property="CollectionPath" String="Products"/>
+						<PropertyValue Property="Label" String="Products" />
+						<PropertyValue Property="SearchSupported" Bool="true" />
+						<PropertyValue Property="Parameters">
+							<Collection>
+								<Record Type="Common.ValueListParameterOut">
+									<PropertyValue Property="LocalDataProperty" PropertyPath="ProductId"/>
+									<PropertyValue Property="ValueListProperty" String="ProductId"/>
+								</Record>
+								<Record	Type="com.sap.vocabularies.Common.v1.ValueListParameterDisplayOnly">
+									<PropertyValue Property="ValueListProperty" String="ProductName" />
+								</Record>
+							</Collection>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+			</Annotations>
+		</Schema>
+	</edmx:DataServices>
+</edmx:Edmx>
